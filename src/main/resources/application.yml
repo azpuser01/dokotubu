@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    # Local
+    url: jdbc:mysql://127.0.0.1/WGP_DEV?serverTimezone=JST
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: java-system
+    password: P@55w0rd
+    
