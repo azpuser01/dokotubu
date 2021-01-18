@@ -11,7 +11,7 @@ import com.example.demo.entity.Message_tbl;
 
 
 public class ExtendedMessage  extends Message_tbl{
-	private String accunt;
+	private String account;
 	private String message;
 	private int logId;
 	private int MessageId;
@@ -23,11 +23,11 @@ public class ExtendedMessage  extends Message_tbl{
 	}
 	
 	
-	public String getAccunt() {
-		return accunt;
+	public String getAccount() {
+		return account;
 	}
-	public void setAccunt(String accunt) {
-		this.accunt = accunt;
+	public void setAccount(String accunt) {
+		this.account = accunt;
 	}
 	public String getMessage() {
 		return message;

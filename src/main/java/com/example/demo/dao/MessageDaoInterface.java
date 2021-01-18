@@ -13,7 +13,7 @@ import com.example.demo.entity.Message_tbl;
  * @author demo
  */
 
-public interface CommentDaoInterface {
+public interface MessageDaoInterface {
 	/**
 	 * つぶやき新規作成
 	 * @param messageCreateForm
