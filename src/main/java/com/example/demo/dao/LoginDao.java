@@ -4,9 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.DokotubuConstant;
@@ -23,23 +22,26 @@ import com.example.demo.DokotubuConstant;
 public class LoginDao implements LoginDaoInterface {
 
 	private NamedParameterJdbcTemplate namedParameterjdbcTemplate;
+	
+	@Autowired
+	public LoginDao(NamedParameterJdbcTemplate namedParameterjdbcTemplate) {
+		this.namedParameterjdbcTemplate = namedParameterjdbcTemplate;
+	}
 
 	@Override
 	public Optional<DokotubuConstant> login(String account, String password) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 
-		String sql = "select count(ACCOUNT) " 
+		String sql = "select count(account) " 
 				+ "from USER_TBL "
 				+ "where ACCOUNT = :ACCOUNT "
-				+ "and PASS = :PASSWORD";
+				+ "and PASS = :PASS ";
 
 		parameters.put("ACCOUNT", account);
-		parameters.put("PASSWORD", password);
+		parameters.put("PASS", password);
 		
 		
-		Integer result = namedParameterjdbcTemplate.queryForObject(sql, parameters, Integer.class);
-				
-		if (result == 0) {
+		if (namedParameterjdbcTemplate.queryForObject(sql, parameters, Integer.class) == 0) {
 			return null;
 		} else {
 			return Optional.ofNullable(DokotubuConstant.IS_APPROVAL);

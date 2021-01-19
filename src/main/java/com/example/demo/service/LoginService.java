@@ -5,28 +5,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.DokotubuConstant;
-import com.example.demo.dao.LoginDaoInterface;
+import com.example.demo.dao.LoginDao;
 
 @Service
 public class LoginService implements LoginServiceInterface {
 
 
-	private LoginDaoInterface loginDaoInterface;
+	private LoginDao loginDao;
 
 
 	
 
 	@Autowired
-	public LoginService(LoginDaoInterface loginDaoInterface) {
+	public LoginService(LoginDao loginDao) {
 
-		this.loginDaoInterface = loginDaoInterface;
+		this.loginDao = loginDao;
 	}
 
 	@Override
 	public DokotubuConstant login(String account, String password) {
 		try {
-
-			loginDaoInterface.login(account, password).get();
+			
+			loginDao.login(account, password).get();
 
 //			userId.equalsIgnoreCase("minato");
 //			userId.equalsIgnoreCase("1234");
