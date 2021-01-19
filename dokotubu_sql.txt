@@ -30,13 +30,13 @@
   /* テーブル作成  */
 
   # 存在する場合はテーブルを破棄する
-  drop table if exists USER_TBL;
   drop table if exists MESSAGE_TBL;
+  drop table if exists USER_TBL;
 
   # ユーザー情報テーブルを作成する
   create table if not exists USER_TBL(
   	USERID int(4) NOT NULL AUTO_INCREMENT,
-  	ACCOUNT varchar(20) NOT NULL,
+  	ACCOUNT varchar(20) NOT NULL unique,
   	PASS char(4) NOT NULL,
     primary key (USERID)
   ) default charset=utf8mb4;
@@ -71,4 +71,5 @@
   show tables;
 	select * from USER_TBL;
 	select * from MESSAGE_TBL;
+
 

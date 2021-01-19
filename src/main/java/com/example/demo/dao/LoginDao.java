@@ -28,7 +28,8 @@ public class LoginDao implements LoginDaoInterface {
 
 		String sql = "select count(ACCOUNT) " 
 				+ "from USER_TBL"
-				+ "where ACCOUNT = :ACCOUNT and PASSWORD = :PASSWORD";
+				+ "where ACCOUNT = :ACCOUNT "
+				+ "and PASSWORD = :PASSWORD";
 
 		parameters.put("ACCOUNT", account);
 		parameters.put("PASSWORD", password);
