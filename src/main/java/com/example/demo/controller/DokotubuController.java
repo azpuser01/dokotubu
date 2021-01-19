@@ -48,11 +48,12 @@ public class DokotubuController {
 	}
 	
 	@PostMapping("Login")//Loginでpostされた場合動作
-<<<<<<< HEAD
+
 	public String postLogin(Model model) {
 		
-		return "redirect:Main";//URLを変えるためMainでリダイレクト
-=======
+		return "redirect:Main";
+		}//URLを変えるためMainでリダイレクト
+
 	public String postLogin(@ModelAttribute("loginForm") @Validated LoginForm loginForm, Model model,RedirectAttributes redirectAttributes) {
 		String userId = loginForm.getAccount();
 		int password = loginForm.getPass();
@@ -79,6 +80,6 @@ public class DokotubuController {
 	@GetMapping("Top")
 	public String getTop(Model model) {
 		return "index";//main.htmlへ遷移
->>>>>>> origin/20210119
+
 	}
 }

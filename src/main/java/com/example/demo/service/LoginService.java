@@ -9,18 +9,16 @@ import com.example.demo.dao.LoginDaoInterface;
 
 @Service
 public class LoginService implements LoginServiceInterface {
-<<<<<<< HEAD
+
 
 	private LoginDaoInterface loginDaoInterface;
 
-	@Autowired
-	public LoginService( LoginDaoInterface loginDaoInterface) {
-=======
-	private LoginDaoInterface loginDaoInterface;
+
+	
 
 	@Autowired
 	public LoginService(LoginDaoInterface loginDaoInterface) {
->>>>>>> origin/20210119
+
 		this.loginDaoInterface = loginDaoInterface;
 	}
 
