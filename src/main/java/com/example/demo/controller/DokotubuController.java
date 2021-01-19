@@ -17,6 +17,7 @@ public class DokotubuController {
 	
 	@PostMapping("Login")//Loginでpostされた場合動作
 	public String postLogin(Model model) {
+		
 		return "redirect:Main";//URLを変えるためMainでリダイレクト
 	}
 }

@@ -3,19 +3,19 @@ package com.example.demo.form;
 public class MainForm {
 
 	// フィールド
-	private String name;
+	private String account;
 	private String message;
 
 	// コンストラクタ
 	public MainForm() {
 	}
 
-	public String getName() {
-		return name;
+	public String getAccount() {
+		return account;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String account) {
+		this.account = account;
 	}
 
 	public String getMessage() {

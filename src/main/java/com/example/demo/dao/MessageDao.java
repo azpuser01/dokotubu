@@ -27,9 +27,11 @@ public class MessageDao implements MessageDaoInterface {
 	public void insertCallmemo(Message_tbl message) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		// メッセージテーブルへのインサート
-		String sql = "insert into MESSAGE_TBL" + "(MESSAGEID, LOG_ID, MESSAGE)" + "values(:MESSAGEID,LOG_ID:,:MESSAGE)";
+		String sql = "insert into MESSAGE_TBL" 
+				+ "(MESSAGE, LOG_ID)" 
+				+ "values(:MESSAGE,:LOG_ID)";
 
-		parameters.put("MESSAGEID", message.getMessageId());
+		
 		parameters.put("LOG_ID", message.getUserId());
 		parameters.put("MESSAGE", message.getMessage());
 
@@ -41,8 +43,11 @@ public class MessageDao implements MessageDaoInterface {
 
 		Map<String, Object> parameters = new HashMap<String, Object>();
 
-		String sql = "select U.* ,M.*" + "from USER_TBL; " + "left outer join MESSAGE_TBL　as U"
-				+ "on U.USERID = M.LOG_ID" + "order by M.MESSAGEID";
+		String sql = "select U.* ,M.*" 
+				+ "from USER_TBL; " 
+				+ "left outer join MESSAGE_TBL　as U"
+				+ "on U.USERID = M.LOG_ID" 
+				+ "order by M.MESSAGEID";
 
 		List<Map<String, Object>> resultList = namedParameterjdbcTemplate.queryForList(sql, parameters);
 		List<ExtendedMessage> list = new ArrayList<ExtendedMessage>();
@@ -51,9 +56,7 @@ public class MessageDao implements MessageDaoInterface {
 			ExtendedMessage message = new ExtendedMessage();
 			message.setAccount((String) result.get("account"));
 			message.setMessage((String) result.get("message"));
-			message.setLogId((int) result.get("log_id"));
-			message.setMessageId((int) result.get("messageid"));
-			
+
 			list.add(message);
 		}
 
