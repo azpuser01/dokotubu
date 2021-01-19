@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.DokotubuConstant;
@@ -27,14 +29,17 @@ public class LoginDao implements LoginDaoInterface {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 
 		String sql = "select count(ACCOUNT) " 
-				+ "from USER_TBL"
+				+ "from USER_TBL "
 				+ "where ACCOUNT = :ACCOUNT "
-				+ "and PASSWORD = :PASSWORD";
+				+ "and PASS = :PASSWORD";
 
 		parameters.put("ACCOUNT", account);
 		parameters.put("PASSWORD", password);
-
-		if (namedParameterjdbcTemplate.queryForObject(sql, parameters, Integer.class) == 0) {
+		
+		
+		Integer result = namedParameterjdbcTemplate.queryForObject(sql, parameters, Integer.class);
+				
+		if (result == 0) {
 			return null;
 		} else {
 			return Optional.ofNullable(DokotubuConstant.IS_APPROVAL);

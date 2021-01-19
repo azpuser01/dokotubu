@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,12 +9,10 @@ import com.example.demo.dao.LoginDaoInterface;
 
 @Service
 public class LoginService implements LoginServiceInterface {
-	private HttpServletRequest httpServletRequest;
 	private LoginDaoInterface loginDaoInterface;
 
 	@Autowired
-	public LoginService(HttpServletRequest httpServletRequest, LoginDaoInterface loginDaoInterface) {
-		this.httpServletRequest = httpServletRequest;
+	public LoginService(LoginDaoInterface loginDaoInterface) {
 		this.loginDaoInterface = loginDaoInterface;
 	}
 
@@ -25,6 +22,8 @@ public class LoginService implements LoginServiceInterface {
 
 			loginDaoInterface.login(userId, password).get();
 
+//			userId.equalsIgnoreCase("minato");
+//			userId.equalsIgnoreCase("1234");
 		} catch (NullPointerException e) {
 			return DokotubuConstant.IS_NOT_APPROVAL;
 		}
