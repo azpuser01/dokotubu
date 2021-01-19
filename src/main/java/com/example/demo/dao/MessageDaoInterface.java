@@ -18,14 +18,14 @@ public interface MessageDaoInterface {
 	 * つぶやき新規作成
 	 * @param messageCreateForm
 	 */
-	void insertCallmemo(Message_tbl message);
+	void insertMessage(Message_tbl message);
 	
 	/**
 	 * 表示条件を指定してコールメモリストを取得
 	 * @param callmemoListForm
 	 * @return List<{@link CallmemoList}>
 	 */
-	List<ExtendedMessage> getAllCallmemo(MessageList messageList);
+	List<ExtendedMessage> getAllMessage(MessageList messageList);
 	
 
 }

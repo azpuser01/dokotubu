@@ -24,7 +24,7 @@ public class MessageDao implements MessageDaoInterface {
 	}
 
 	@Override
-	public void insertCallmemo(Message_tbl message) {
+	public void insertMessag(Message_tbl message) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		// メッセージテーブルへのインサート
 		String sql = "insert into MESSAGE_TBL" 
@@ -39,7 +39,7 @@ public class MessageDao implements MessageDaoInterface {
 	}
 
 	@Override
-	public List<ExtendedMessage> getAllCallmemo(MessageList messageList) {
+	public List<ExtendedMessage> getAllMessaig(MessageList messageList) {
 
 		Map<String, Object> parameters = new HashMap<String, Object>();
 
