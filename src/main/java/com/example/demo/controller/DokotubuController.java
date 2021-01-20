@@ -23,6 +23,7 @@ import com.example.demo.dao.MessageDao;
 import com.example.demo.dto.ExtendedMessage;
 import com.example.demo.dto.MessageList;
 import com.example.demo.dto.UserToken;
+import com.example.demo.entity.Message_tbl;
 import com.example.demo.entity.User_tbl;
 import com.example.demo.form.LoginForm;
 import com.example.demo.form.MainForm;
@@ -97,21 +98,18 @@ public class DokotubuController {
 
 	@PostMapping("PostMessage") // PostMessageでpostされた場合動作
 	public String postMessage(@ModelAttribute("mainForm") @Validated MainForm mainForm,
-			BindingResult result, Model model, RedirectAttributes redirectAttributes) {
-
+			MessageDao messageDao,BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+		Message_tbl messageTbl = new Message_tbl();
+				
 		if (result.hasErrors() || mainForm.getMessage().length() == 0) {
 			redirectAttributes.addFlashAttribute("errmsg", "投稿内容がありません。");
 			return "redirect:Main";
 		}
-		String userId = mainForm.getUserId();
-		String message = mainForm.getMessage();
-		DokotubuConstant postMessageResult = loginService.login(userId, message);
-
-		if (postMessageResult.equals(DokotubuConstant.IS_APPROVAL)) {
-		} else {
-			// 失敗時
-			redirectAttributes.addFlashAttribute("errmsg", "投稿できませんでした。");
-		}
+		System.out.println(mainForm.getMessage() + mainForm.getUserId());
+		messageTbl.setUserId(userToken.getUserId());
+		messageTbl.setMessage(mainForm.getMessage());
+		messageDao.insertMessage(messageTbl);;
+		
 		return "redirect:Main";
 	}
 
