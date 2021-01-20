@@ -22,6 +22,8 @@ import com.example.demo.DokotubuConstant;
 import com.example.demo.dao.MessageDao;
 import com.example.demo.dto.ExtendedMessage;
 import com.example.demo.dto.MessageList;
+import com.example.demo.dto.UserToken;
+import com.example.demo.entity.Message_tbl;
 import com.example.demo.entity.User_tbl;
 import com.example.demo.form.LoginForm;
 import com.example.demo.form.MainForm;
@@ -31,7 +33,7 @@ import com.example.demo.service.UserSettingService;
 import com.example.demo.service.UserSettingServiceInterface;
 
 @Controller
-@SessionAttributes(types = LoginForm.class)
+@SessionAttributes(types = UserToken.class)
 @RequestMapping
 public class DokotubuController {
 
@@ -74,7 +76,7 @@ public class DokotubuController {
 
 	@PostMapping("Login") // Loginでpostされた場合動作
 	public String postLogin(@ModelAttribute("loginForm") @Validated LoginForm loginForm, BindingResult result,
-			Model model, RedirectAttributes redirectAttributes) {
+			UserToken userToken,Model model, RedirectAttributes redirectAttributes) {
 
 		if (result.hasErrors()) {
 			redirectAttributes.addFlashAttribute("errmsg", "アカウント名とパスワードを入力してください。");
@@ -85,6 +87,7 @@ public class DokotubuController {
 		DokotubuConstant loginResult = loginService.login(account, password);
 
 		if (loginResult.equals(DokotubuConstant.IS_APPROVAL)) {
+			userToken = loginService.getUserToken(account, password);
 			return "redirect:Main";// URLを変えるためMainでリダイレクト
 		} else {
 			// 失敗時
@@ -94,22 +97,19 @@ public class DokotubuController {
 	}
 
 	@PostMapping("PostMessage") // PostMessageでpostされた場合動作
-	public String postMessage(LoginForm loginForm, @ModelAttribute("mainForm") @Validated MainForm mainForm,
-			BindingResult result, Model model, RedirectAttributes redirectAttributes) {
-
+	public String postMessage(@ModelAttribute("mainForm") @Validated MainForm mainForm,
+			MessageDao messageDao,BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+		Message_tbl messageTbl = new Message_tbl();
+				
 		if (result.hasErrors() || mainForm.getMessage().length() == 0) {
 			redirectAttributes.addFlashAttribute("errmsg", "投稿内容がありません。");
 			return "redirect:Main";
 		}
-		String account = mainForm.getAccount();
-		String message = mainForm.getMessage();
-		DokotubuConstant postMessageResult = loginService.login(account, message);
-
-		if (postMessageResult.equals(DokotubuConstant.IS_APPROVAL)) {
-		} else {
-			// 失敗時
-			redirectAttributes.addFlashAttribute("errmsg", "投稿できませんでした。");
-		}
+		System.out.println(mainForm.getMessage() + mainForm.getUserId());
+		messageTbl.setUserId(userToken.getUserId());
+		messageTbl.setMessage(mainForm.getMessage());
+		messageDao.insertMessage(messageTbl);;
+		
 		return "redirect:Main";
 	}
 
