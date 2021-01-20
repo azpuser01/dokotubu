@@ -110,6 +110,13 @@ public class DokotubuController {
 		return "index";// main.htmlへ遷移
 
 	}
+	
+	@GetMapping("Registation")
+	public String GetRegistation() {
+		
+		return "registation";
+	}
+		
 	@PostMapping("Registation")
 	public String PostRegistation() {
 		

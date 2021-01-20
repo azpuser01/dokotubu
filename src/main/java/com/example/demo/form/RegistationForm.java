@@ -1,6 +1,7 @@
 package com.example.demo.form;
 
-public class Registation {
+
+public class RegistationForm {
 	
 	
 	private String accont;
@@ -8,7 +9,7 @@ public class Registation {
 	
 	
 	
-	public Registation() {
+	public RegistationForm() {
 		super();
 	}
 	public String getAccont() {
