@@ -14,11 +14,11 @@
 <div class="container">
 <div class="row">
 <div class="mx-auto col-md-6">
+<form action="#" th:action="@{Login}" method="post" id="loginForm" th:object="${loginForm}" class="form-signin">
 <h1 class="mt-5 h3">ログイン</h1>
 <div th:if="${errmsg != null}">
 <p th:text="${errmsg}" class="alert alert-danger" role="alert"></p>
 </div>
-<form action="#" th:action="@{Login}" method="post" id="loginForm" th:object="${loginForm}">
 <div class="form-group">
 <label for="inputAccount">アカウント名</label>
 <input type="text" name="account" class="form-control" id="inputAccount" required>
