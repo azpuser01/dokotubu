@@ -1,0 +1,74 @@
+/*
+  Intern練習プロジェクト
+  メッセージ共有システム「どこつぶ」
+  Ver 2021-01-18
+
+ */
+
+/* データベース設定 */
+
+  # 匿名ユーザーおよび「java-system」ユーザーが存在する場合は削除する
+  drop user if exists '';
+  drop user if exists 'java-system';
+
+  # 「java-system」ユーザーを作成する
+  create user 'java-system'@'%' identified by 'P@55w0rd';
+
+  # 「DOKOTUBU」データベースが存在する場合は削除し、再作成する
+  drop database if exists DOKOTUBU;
+  create database DOKOTUBU;
+
+  # 「DOKOTUBU」データベースに対し、「java-system」ユーザーに全権限を付与する
+  grant all on WGP_DEV.* to 'java-system'@'%';
+
+  # 念のためにキャッシュをクリアする
+  flush privileges;
+
+  # 「DOKOTUBU」データベースに移動
+  use DOKOTUBU;
+
+  /* テーブル作成  */
+
+  # 存在する場合はテーブルを破棄する
+  drop table if exists USER_TBL;
+  drop table if exists MESSAGE_TBL;
+
+  # ユーザー情報テーブルを作成する
+  create table if not exists USER_TBL(
+  	USERID int(4) NOT NULL AUTO_INCREMENT,
+  	ACCOUNT varchar(20) NOT NULL,
+  	PASS text NOT NULL,
+    primary key (USERID)
+  ) default charset=utf8mb4;
+
+ 
+  # メッセージテーブルを作成する
+  create table if not exists MESSAGE_TBL(
+ 	MESSAGEID int(4) NOT NULL AUTO_INCREMENT,
+   	LOG_ID int(4) NOT NULL,
+  	MESSAGE text NOT NULL,
+    primary key (MESSAGEID),
+    foreign key (LOG_ID) references USER_TBL(USERID)
+  ) default charset=utf8mb4;
+
+
+  /* データ挿入 */
+
+  # USER_TBLにデータ挿入
+  insert into `USER_TBL` (`userId`, `account`, `pass`)
+  values
+    ('0001','minato',1234),
+    ('0002','ayabe7',5678);
+    
+  # MESSAGE_TBLにデータ挿入
+  insert into `MESSAGE_TBL` (`messageId`, `log_Id`, `message`)
+  values 
+  	(0001,0001,'Hello! dokotubu');
+     
+  /* 更新内容の確認 */
+  select user, host from mysql.user;
+  show databases;
+  show tables;
+	select * from USER_TBL;
+	select * from MESSAGE_TBL;
+
