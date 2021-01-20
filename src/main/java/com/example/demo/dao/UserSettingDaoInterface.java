@@ -3,7 +3,7 @@ package com.example.demo.dao;
 import java.util.Optional;
 
 import com.example.demo.dto.UserToken;
-import com.example.demo.entity.User_tbl;
+import com.example.demo.form.RegistationForm;
 
 
 
@@ -23,5 +23,5 @@ public interface UserSettingDaoInterface {
 	 * @param user
 	 * @param pass
 	 */
-	void insertUser(User_tbl user);
+	void insertUser(RegistationForm user);
 }

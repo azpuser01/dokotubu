@@ -6,11 +6,13 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dto.UserToken;
-import com.example.demo.entity.User_tbl;
+import com.example.demo.form.RegistationForm;
 
+@Repository
 public class UserSettingDao implements UserSettingDaoInterface {
 
 	public static final String DEFAULT_SORTTYPE = "ASC";
@@ -42,14 +44,14 @@ public class UserSettingDao implements UserSettingDaoInterface {
 
 	@Override
 	@Transactional
-	public void insertUser(User_tbl user) {
+	public void insertUser(RegistationForm user) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 
-		String sql = "insert into USER_TBL " + "(ACCOUNT, USER_ID,PASS ) " + "values(:ACCOUNT,:USER_ID,:PASS)";
+		String sql = "insert into USER_TBL " + "(ACCOUNT,PASS ) " + "values(:ACCOUNT,:PASS);";
 		parameters.put("ACCOUNT", user.getAccount());
-		parameters.put("PASSWORD", user.getPass());
-		parameters.put("USER_ID", user.getUserId());
+		parameters.put("PASS", user.getPass());
 
+		
 		namedParameterjdbcTemplate.update(sql, parameters);
 
 	}

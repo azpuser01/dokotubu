@@ -11,7 +11,8 @@
 <article>
 <h2>投稿する</h2>
 <form action="#" th:action="@{PostMessage}" method="post" id="tsubuyakiForm">
-<textarea name="tsubuyaki"></textarea>
+<textarea name="message"></textarea>
+<input type="hidden" name="userId" th:value="${userToken.userId}">
 <input type="submit" value="投稿">
 </form>
 </article>

@@ -4,7 +4,7 @@ public class User_tbl {
 
 	// フィールド
 	private String account;
-	private int pass;
+	private String pass;
 	private int userId;
 
 	// コンストラクタ
@@ -20,11 +20,11 @@ public class User_tbl {
 		this.account = account;
 	}
 
-	public int getPass() {
+	public String getPass() {
 		return pass;
 	}
 
-	public void setPass(int pass) {
+	public void setPass(String pass) {
 		this.pass = pass;
 	}
 
