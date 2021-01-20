@@ -76,4 +76,10 @@ public class DokotubuController {
 		return "registation";
 		
 	}
+	@PostMapping("Registation")
+	public String PostRegistation() {
+		
+		return "index";
+		
+	}
 }

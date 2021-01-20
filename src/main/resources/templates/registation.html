@@ -18,8 +18,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="mx-auto col-md-6">
-				<form action="#" th:action="@{registation}" method="post" id="registationForm"
-					th:object="${registationForm}" class="form-registation">
+				<form action="#" th:action="@{Registation}" method="post"
+					id="registationForm" th:object="${RegistationForm}"
+					class="form-registation">
 					<h1 class="mt-5 h3">新規登録</h1>
 					<div th:if="${errmsg != null}">
 						<p th:text="${errmsg}" class="alert alert-danger" role="alert"></p>
