@@ -12,22 +12,23 @@ public class LoginService implements LoginServiceInterface {
 
 
 	private LoginDao loginDao;
-
+	private PasswordEncode passwordEncode;
 
 	
 
 	@Autowired
-	public LoginService(LoginDao loginDao) {
+	public LoginService(LoginDao loginDao,PasswordEncode passwordEncode) {
 
 		this.loginDao = loginDao;
+		this.passwordEncode = passwordEncode;
 	}
 
 	@Override
 	public DokotubuConstant login(String account, String password) {
 		try {
 			
-			loginDao.login(account, password).get();
 
+			loginDao.login(account, passwordEncode.makePasswordEncord(password,account)).get();
 //			userId.equalsIgnoreCase("minato");
 //			userId.equalsIgnoreCase("1234");
 		} catch (NullPointerException e) {

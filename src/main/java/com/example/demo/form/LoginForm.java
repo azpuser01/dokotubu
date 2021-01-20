@@ -5,7 +5,7 @@ public class LoginForm {
 	
 	// フィールド
 	private String account;
-	private int pass;
+	private String pass;
 
 	// コンストラクタ
 	public LoginForm() {
@@ -20,11 +20,11 @@ public class LoginForm {
 		this.account = account;
 	}
 
-	public int getPass() {
+	public String getPass() {
 		return pass;
 	}
 
-	public void setPass(int pass) {
+	public void setPass(String pass) {
 		this.pass = pass;
 	}
 

@@ -24,6 +24,8 @@ public class UserSettingService implements UserSettingServiceInterface {
 	@Override
 	public void addUser(RegistationForm registationForm) {
 		try {
+			
+			registationForm.setPass(passwordEncode.makePasswordEncord(registationForm.getPass(), registationForm.getAccount()));
 			dao.insertUser(registationForm);
 		} catch (Exception e) {
 			

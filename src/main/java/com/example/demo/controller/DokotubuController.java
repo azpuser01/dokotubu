@@ -81,7 +81,7 @@ public class DokotubuController {
 			return "redirect:";
 		}
 		String account = loginForm.getAccount();
-		String password = Integer.toString(loginForm.getPass());
+		String password = loginForm.getPass();
 		DokotubuConstant loginResult = loginService.login(account, password);
 
 		if (loginResult.equals(DokotubuConstant.IS_APPROVAL)) {
