@@ -5,8 +5,8 @@
 <title>どこつぶ|メイン</title>
 </head>
 <body>
-<div th:if="${loginForm.account != null}">
-<header><span th:text="${loginForm.account}+'さんログイン中!'"></span><a th:href="@{/Logout}" th:text="ログアウト"></a></header>
+<div th:if="${userToken.account != null}">
+<header><span th:text="${userToken.account}+'さんログイン中!'"></span><a th:href="@{/Logout}" th:text="ログアウト"></a></header>
 <h1>どこつぶメイン画面</h1>
 <article>
 <h2>投稿する</h2>
@@ -28,7 +28,7 @@
 </div>
 </article>
 </div>
-<div th:unless="${loginForm.account != null}" th:text="ログインしなおしてください。">
+<div th:unless="${userToken.account != null}" th:text="ログインしなおしてください。">
 <a th:href="${Login}">ログインページへ</a>
 </div>
 </body>
