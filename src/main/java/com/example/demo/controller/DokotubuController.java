@@ -47,13 +47,13 @@ public class DokotubuController {
 		return "main";//main.htmlへ遷移
 	}
 	
-	@PostMapping("Login")//Loginでpostされた場合動作
 
 	public String postLogin(Model model) {
 		
 		return "redirect:Main";
 		}//URLを変えるためMainでリダイレクト
 
+	@PostMapping("Login")//Loginでpostされた場合動作
 	public String postLogin(@ModelAttribute("loginForm") @Validated LoginForm loginForm, Model model,RedirectAttributes redirectAttributes) {
 		String userId = loginForm.getAccount();
 		int password = loginForm.getPass();
