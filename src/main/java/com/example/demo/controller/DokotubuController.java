@@ -25,15 +25,11 @@ import com.example.demo.service.LoginService;
 @RequestMapping
 public class DokotubuController {
 
-	private HttpServletRequest httpServletRequest;
-	private HttpServletResponse httpServletResponse;
 	private LoginService loginService;
 
 	@Autowired
 	DokotubuController(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
 			LoginService loginService) {
-		this.httpServletRequest = httpServletRequest;
-		this.httpServletResponse = httpServletResponse;
 		this.loginService = loginService;
 	}
 
@@ -72,5 +68,12 @@ public class DokotubuController {
 	public String getLogout(@ModelAttribute("loginForm") @Validated LoginForm loginForm, SessionStatus sessionStatus) {
 		sessionStatus.setComplete();
 		return "redirect:";
+	}
+	
+	@GetMapping("Registation")
+	public String getRegistation() {
+		
+		return "registation";
+		
 	}
 }

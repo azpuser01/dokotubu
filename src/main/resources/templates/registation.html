@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>どこつぶ＿新規登録</title>
+
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-warning">
+		<i class="fas fa-comments navbar-brand text-white">どこつぶ</i>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<div class="mx-auto col-md-6">
+				<form action="#" th:action="@{registation}" method="post" id="registationForm"
+					th:object="${registationForm}" class="form-registation">
+					<h1 class="mt-5 h3">新規登録</h1>
+					<div th:if="${errmsg != null}">
+						<p th:text="${errmsg}" class="alert alert-danger" role="alert"></p>
+					</div>
+					<div class="form-group">
+						<label for="inputAccount">アカウント名</label> <input type="text"
+							name="account" class="form-control" id="inputAccount" required>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword">パスワード</label> <input type="password"
+							name="pass" class="form-control" id="inputPassword" required>
+					</div>
+					<input type="submit" value="ログイン"
+						class="btn btn-warning text-white font-weight-bold">
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
