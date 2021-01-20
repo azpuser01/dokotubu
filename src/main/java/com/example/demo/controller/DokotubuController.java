@@ -82,16 +82,16 @@ public class DokotubuController {
 	}
 
 	@PostMapping("PostMessage") // PostMessageでpostされた場合動作
-	public String postMessage(LoginForm loginForm, @ModelAttribute("mainForm") @Validated MainForm mainForm,
+	public String postMessage(@ModelAttribute("mainForm") @Validated MainForm mainForm,
 			BindingResult result, Model model, RedirectAttributes redirectAttributes) {
 
 		if (result.hasErrors() || mainForm.getMessage().length() == 0) {
 			redirectAttributes.addFlashAttribute("errmsg", "投稿内容がありません。");
 			return "redirect:Main";
 		}
-		String account = mainForm.getAccount();
+		String userId = mainForm.getUserId();
 		String message = mainForm.getMessage();
-		DokotubuConstant postMessageResult = loginService.login(account, message);
+		DokotubuConstant postMessageResult = loginService.login(userId, message);
 
 		if (postMessageResult.equals(DokotubuConstant.IS_APPROVAL)) {
 		} else {
