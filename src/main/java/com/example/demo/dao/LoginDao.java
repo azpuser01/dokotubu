@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.DokotubuConstant;
+import com.example.demo.dto.UserToken;
 
 /**
  * ログイン機能に関わるクエリを管理するDAOクラスの実装.
@@ -45,6 +46,26 @@ public class LoginDao implements LoginDaoInterface {
 			return null;
 		} else {
 			return Optional.ofNullable(DokotubuConstant.IS_APPROVAL);
+		}
+	}
+	
+	public UserToken getUserToken(String account, String password) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		UserToken userToken = null;
+
+		String sql = "select count(account) " 
+				+ "from USER_TBL "
+				+ "where ACCOUNT = :ACCOUNT "
+				+ "and PASS = :PASS ";
+
+		parameters.put("ACCOUNT", account);
+		parameters.put("PASS", password);
+		
+		
+		if (namedParameterjdbcTemplate.queryForObject(sql, parameters, Integer.class) == 0) {
+			return null;
+		} else {
+			return userToken;
 		}
 	}
 
