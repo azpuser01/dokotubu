@@ -47,16 +47,11 @@ public class DokotubuController {
 		return "main";// main.htmlへ遷移
 	}
 
-	public String postLogin(Model model) {
-
-		return "redirect:Main";
-	}// URLを変えるためMainでリダイレクト
-
-	@PostMapping("Login") // Loginでpostされた場合動作
+	@PostMapping("Login") // Loginでpostされた場合動作 
 	public String postLogin(@ModelAttribute("loginForm") @Validated LoginForm loginForm, BindingResult result,Model model,
 			RedirectAttributes redirectAttributes) {
 		
-		if(result.hasErrors()) {
+		if(result.hasErrors()) {//BindResultはLoginFormに値が入ってるか確認する
 			redirectAttributes.addFlashAttribute("errmsg", "アカウント名とパスワードを入力してください。");
 			return "redirect:";
 		}
@@ -76,12 +71,6 @@ public class DokotubuController {
 	@GetMapping("Logout")
 	public String getLogout(@ModelAttribute("loginForm") @Validated LoginForm loginForm, SessionStatus sessionStatus) {
 		sessionStatus.setComplete();
-		return "index";
-	}
-
-	@GetMapping("Top")
-	public String getTop(Model model) {
-		return "index";// main.htmlへ遷移
-
+		return "redirect:";
 	}
 }
