@@ -4,7 +4,7 @@ package com.example.demo.form;
 public class RegistationForm {
 	
 	
-	private String accont;
+	private String account;
 	private String pass;
 	
 	
@@ -12,11 +12,11 @@ public class RegistationForm {
 	public RegistationForm() {
 		super();
 	}
-	public String getAccont() {
-		return accont;
+	public String getAccount() {
+		return account;
 	}
-	public void setAccont(String accont) {
-		this.accont = accont;
+	public void setAccount(String accont) {
+		this.account = accont;
 	}
 	public String getPass() {
 		return pass;

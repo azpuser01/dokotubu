@@ -22,9 +22,13 @@ import com.example.demo.DokotubuConstant;
 import com.example.demo.dao.MessageDao;
 import com.example.demo.dto.ExtendedMessage;
 import com.example.demo.dto.MessageList;
+import com.example.demo.entity.User_tbl;
 import com.example.demo.form.LoginForm;
 import com.example.demo.form.MainForm;
+import com.example.demo.form.RegistationForm;
 import com.example.demo.service.LoginService;
+import com.example.demo.service.UserSettingService;
+import com.example.demo.service.UserSettingServiceInterface;
 
 @Controller
 @SessionAttributes(types = LoginForm.class)
@@ -33,13 +37,23 @@ public class DokotubuController {
 
 	private LoginService loginService;
 	private MessageDao messageDao;
-
+	private UserSettingService userSettingService;
+	
 	@Autowired
-	DokotubuController(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
-			LoginService loginService,MessageDao messageDao) {
+	public DokotubuController(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,LoginService loginService, MessageDao messageDao, UserSettingService userSettingService) {
+		super();
 		this.loginService = loginService;
 		this.messageDao = messageDao;
+		this.userSettingService = userSettingService;
 	}
+
+
+//	@Autowired
+//	DokotubuController(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+//			LoginService loginService,MessageDao messageDao) {
+//		this.loginService = loginService;
+//		this.messageDao = messageDao;
+//	}
 
 	@ModelAttribute("loginForm")
 	public LoginForm setUpLoginForm() {
@@ -118,7 +132,14 @@ public class DokotubuController {
 	}
 		
 	@PostMapping("Registation")
-	public String PostRegistation() {
+	public String PostRegistation(@Validated RegistationForm registationForm,Model mode,RedirectAttributes redirectAttributes) {
+		User_tbl userTbl = new User_tbl();
+		userTbl.setAccount(registationForm.getAccount());
+		userTbl.setPass(registationForm.getPass());
+		
+		redirectAttributes.addFlashAttribute("title", "ユーザー登録完了");
+		
+		userSettingService.addUser(registationForm);
 		
 		return "index";
 		
