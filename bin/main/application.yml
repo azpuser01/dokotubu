@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    # Local
+    url: jdbc:mysql://127.0.0.1/dokotubu?serverTimezone=JST
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 
+    
