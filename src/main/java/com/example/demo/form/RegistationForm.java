@@ -1,31 +1,30 @@
 package com.example.demo.form;
 
-public class LoginForm {
 
+public class RegistationForm {
 	
-	// フィールド
+	
 	private String account;
 	private String pass;
-
-	// コンストラクタ
-	public LoginForm() {
+	
+	
+	
+	public RegistationForm() {
+		super();
 	}
-
-	// getter setterの作成
 	public String getAccount() {
 		return account;
 	}
-
-	public void setAccount(String account) {
-		this.account = account;
+	public void setAccount(String accont) {
+		this.account = accont;
 	}
-
 	public String getPass() {
 		return pass;
 	}
-
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
+	
+	
 
 }

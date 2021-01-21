@@ -6,28 +6,30 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.DokotubuConstant;
 import com.example.demo.dao.LoginDao;
+import com.example.demo.dto.UserToken;
 
 @Service
 public class LoginService implements LoginServiceInterface {
 
 
 	private LoginDao loginDao;
-
+	private PasswordEncode passwordEncode;
 
 	
 
 	@Autowired
-	public LoginService(LoginDao loginDao) {
+	public LoginService(LoginDao loginDao,PasswordEncode passwordEncode) {
 
 		this.loginDao = loginDao;
+		this.passwordEncode = passwordEncode;
 	}
 
 	@Override
 	public DokotubuConstant login(String account, String password) {
 		try {
 			
-			loginDao.login(account, password).get();
 
+			loginDao.login(account, passwordEncode.makePasswordEncord(password,account)).get();
 //			userId.equalsIgnoreCase("minato");
 //			userId.equalsIgnoreCase("1234");
 		} catch (NullPointerException e) {
@@ -35,6 +37,22 @@ public class LoginService implements LoginServiceInterface {
 		}
 
 		return DokotubuConstant.IS_APPROVAL;
+	}
+
+	public UserToken getUserToken(String account, String password) {
+		
+		UserToken userToken = null;
+		try {
+			
+			userToken = loginDao.getUserToken(account, password);
+
+//			userId.equalsIgnoreCase("minato");
+//			userId.equalsIgnoreCase("1234");
+		} catch (NullPointerException e) {
+			return userToken;
+		}
+
+		return userToken;
 	}
 
 }
