@@ -19,7 +19,7 @@ public class UserToken implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String account;
-	private int userId;
+	private String userId;
 
 	public String getAccount() {
 		return account;
@@ -29,11 +29,11 @@ public class UserToken implements Serializable {
 		this.account = account;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

@@ -40,13 +40,15 @@ public class DokotubuController {
 	private LoginService loginService;
 	private MessageDao messageDao;
 	private UserSettingService userSettingService;
+	private UserToken userToken;
 	
 	@Autowired
-	public DokotubuController(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,LoginService loginService, MessageDao messageDao, UserSettingService userSettingService) {
+	public DokotubuController(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,LoginService loginService, MessageDao messageDao, UserSettingService userSettingService,UserToken userToken) {
 		super();
 		this.loginService = loginService;
 		this.messageDao = messageDao;
 		this.userSettingService = userSettingService;
+		this.userToken = userToken;
 	}
 
 
@@ -83,11 +85,13 @@ public class DokotubuController {
 			return "redirect:";
 		}
 		String account = loginForm.getAccount();
-		String password = loginForm.getPass();
-		DokotubuConstant loginResult = loginService.login(account, password);
+		String pass = loginForm.getPass();
+		DokotubuConstant loginResult = loginService.login(account, pass);
 
 		if (loginResult.equals(DokotubuConstant.IS_APPROVAL)) {
-			userToken = loginService.getUserToken(account, password);
+			userToken = loginService.getUserToken(account);
+			System.out.println(userToken.getUserId());
+			redirectAttributes.addFlashAttribute(userToken);
 			return "redirect:Main";// URLを変えるためMainでリダイレクト
 		} else {
 			// 失敗時
@@ -105,10 +109,15 @@ public class DokotubuController {
 			redirectAttributes.addFlashAttribute("errmsg", "投稿内容がありません。");
 			return "redirect:Main";
 		}
-		System.out.println(mainForm.getMessage() + mainForm.getUserId());
-		messageTbl.setUserId(userToken.getUserId());
+		System.out.println("[Form]"+mainForm.getMessage() + mainForm.getUserId());
+
+		System.out.println(userToken.getUserId());
+		System.out.println(mainForm.getMessage());
+		System.out.println(userToken.getUserId());
+		int userId = Integer.parseInt(mainForm.getUserId()) ;
+		messageTbl.setUserId(userId);
 		messageTbl.setMessage(mainForm.getMessage());
-		messageDao.insertMessage(messageTbl);;
+		messageDao.insertMessage(messageTbl);
 		
 		return "redirect:Main";
 	}

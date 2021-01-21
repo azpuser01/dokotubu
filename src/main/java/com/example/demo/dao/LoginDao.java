@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -49,24 +50,47 @@ public class LoginDao implements LoginDaoInterface {
 		}
 	}
 	
-	public UserToken getUserToken(String account, String password) {
+//	public UserToken getUserToken(String account, String password) {
+//		Map<String, Object> parameters = new HashMap<String, Object>();
+//		UserToken userToken = null;
+//
+//		String sql = "select count(account) " 
+//				+ "from USER_TBL "
+//				+ "where ACCOUNT = :ACCOUNT "
+//				+ "and PASS = :PASS ";
+//
+//		parameters.put("ACCOUNT", account);
+//		parameters.put("PASS", password);
+//		
+//		
+//		if (namedParameterjdbcTemplate.queryForObject(sql, parameters, Integer.class) == 0) {
+//			return null;
+//		} else {
+//			return userToken;
+//		}
+//	}
+	
+	public UserToken getUserToken(String account) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
-		UserToken userToken = null;
+		UserToken userToken = new UserToken();
 
-		String sql = "select count(account) " 
+		String sql = "select USERID,ACCOUNT " 
 				+ "from USER_TBL "
-				+ "where ACCOUNT = :ACCOUNT "
-				+ "and PASS = :PASS ";
+				+ "where ACCOUNT = :ACCOUNT ";
 
 		parameters.put("ACCOUNT", account);
-		parameters.put("PASS", password);
-		
-		
-		if (namedParameterjdbcTemplate.queryForObject(sql, parameters, Integer.class) == 0) {
+
+		List<Map<String, Object>> list = namedParameterjdbcTemplate.queryForList(sql, parameters);
+
+		if (list.size() == 0) {
 			return null;
-		} else {
-			return userToken;
 		}
+		
+		userToken.setUserId(list.get(0).get("USERID").toString());
+		userToken.setAccount((String) list.get(0).get("ACCOUNT"));
+		System.out.println(userToken.getUserId());
+		return userToken;
+		
 	}
 
 }

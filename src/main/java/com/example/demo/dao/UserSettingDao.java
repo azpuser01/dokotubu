@@ -36,7 +36,7 @@ public class UserSettingDao implements UserSettingDaoInterface {
 
 		UserToken user = new UserToken();
 		user.setAccount(account);
-		user.setUserId((int) result.get("USER_ID"));
+		user.setUserId((String) result.get("USER_ID"));
 
 		return Optional.ofNullable(user);
 

@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dto.ExtendedMessage;
 import com.example.demo.dto.MessageList;
@@ -23,19 +24,37 @@ public class MessageDao implements MessageDaoInterface {
 		this.namedParameterjdbcTemplate = namedParameterjdbcTemplate;
 	}
 
+	
+
+//	@Override
+//	@Transactional
+//	public void insertUser(RegistationForm user) {
+//		Map<String, Object> parameters = new HashMap<String, Object>();
+
 	@Override
+	@Transactional
 	public void insertMessage(Message_tbl message) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		// メッセージテーブルへのインサート
 		String sql = "insert into MESSAGE_TBL" 
-				+ "(MESSAGE, LOG_ID)" 
-				+ "values(:MESSAGE,:LOG_ID)";
-
+				+ "(MESSAGE, LOG_ID) " 
+				+ "values(:MESSAGE,:LOG_ID);";
 		
+		System.out.println("[dao]");
+		System.out.println(message.getMessage());
+		System.out.println(message.getUserId());
 		parameters.put("LOG_ID", message.getUserId());
 		parameters.put("MESSAGE", message.getMessage());
+		System.out.println(sql);
 
 		namedParameterjdbcTemplate.update(sql, parameters);
+//		
+//		String sql = "insert into USER_TBL " + "(ACCOUNT,PASS ) " + "values(:ACCOUNT,:PASS);";
+//		parameters.put("ACCOUNT", user.getAccount());
+//		parameters.put("PASS", user.getPass());
+//		
+//		
+//		namedParameterjdbcTemplate.update(sql, parameters);
 	}
 
 	@Override

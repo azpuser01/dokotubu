@@ -26,6 +26,4 @@ public class MainForm {
 		this.message = message;
 	}
 
-
-
 }

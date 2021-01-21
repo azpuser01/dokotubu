@@ -39,12 +39,14 @@ public class LoginService implements LoginServiceInterface {
 		return DokotubuConstant.IS_APPROVAL;
 	}
 
-	public UserToken getUserToken(String account, String password) {
+	public UserToken getUserToken(String account) {
 		
 		UserToken userToken = null;
 		try {
-			
-			userToken = loginDao.getUserToken(account, password);
+
+//			loginDao.login(account, passwordEncode.makePasswordEncord(password,account)).get();
+			userToken = loginDao.getUserToken(account);
+			System.out.println(userToken.getUserId());
 
 //			userId.equalsIgnoreCase("minato");
 //			userId.equalsIgnoreCase("1234");
