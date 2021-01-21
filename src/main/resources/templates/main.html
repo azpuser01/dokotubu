@@ -25,9 +25,9 @@
 <div class="timeLine">
 <ul th:each="msg : ${msgList}">
 <li class="row m-0 mb-2">
-<div class=" py-2 px-1"><i class="fas fa-user-circle fa-2x"></i></div>
-<div th:text="${msg.account}" class="pl-2 pr-3 d-flex align-items-center"></div>
-<div th:text="${msg.message}" class="rounded-pill border border-warning px-3 d-flex align-items-center"></div>
+<div class=" py-2 px-1 d-flex align-items-center"><i class="fas fa-user-circle fa-2x"></i></div>
+<div th:text="${msg.account}" class="pl-2 pr-3 d-flex align-items-center col-md-1"></div>
+<div th:text="${msg.message}" class="rounded-lg border border-warning px-3 py-2 d-flex align-items-center col-md-10"></div>
 </li>
 </ul>
 </div>
