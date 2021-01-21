@@ -1,36 +1,55 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>どこつぶ|メイン</title>
-</head>
+<head th:replace="common :: meta_header('top',~{::link},~{::script})"></head>
+
 <body>
-<div th:if="${userToken.account != null}">
-<header><span th:text="${userToken.account}+'さんログイン中!'"></span><a th:href="@{/Logout}" th:text="ログアウト"></a></header>
-<h1>どこつぶメイン画面</h1>
-<article>
-<h2>投稿する</h2>
-<form action="#" th:action="@{PostMessage}" method="post" id="tsubuyakiForm">
-<textarea name="message"></textarea>
-<input type="hidden" name="userId" th:value="${userToken.userId}">
-<input type="submit" value="投稿">
-</form>
-</article>
-<article>
-<h2>みんなの投稿</h2>
-<div class="timeLine">
-<table>
-<tr th:each="msg : ${msgList}">
-<td th:text="${msg.account}"></td>
-<td>:</td>
-<td th:text="${msg.message}"></td>
-</tr>
-</table>
-</div>
-</article>
-</div>
-<div th:unless="${userToken.account != null}" th:text="ログインしなおしてください。">
-<a th:href="${Login}">ログインページへ</a>
-</div>
+
+	<div th:if="${userToken.account != null}">
+		<div th:replace="common :: header"></div>
+		<div class="container">
+			<h1 class="mt-5 h3">どこつぶメイン画面</h1>
+			<header>
+				<span th:text="${userToken.account}+'さんログイン中'"></span><a
+					th:href="@{/Logout}" th:text="ログアウト"></a>
+			</header>
+			<article>
+				<h2 class="h4">投稿する</h2>
+				<form action="#" th:action="@{PostMessage}" method="post"
+					id="tsubuyakiForm">
+					<div class="form-group">
+						<textarea name="message" class="form-control"></textarea>
+						<input type="hidden" name="userId" th:value="${userToken.userId}">
+						<input type="submit" value="投稿"
+							class="btn btn-warning text-white font-weight-bold mt-2">
+					</div>
+				</form>
+			</article>
+
+			<article class="mt-5">
+				<h2 class="h4">みんなの投稿</h2>
+				<div class="timeLine">
+					<ul th:each="msg : ${msgList}">
+						<li class="row m-0 mb-2">
+							<div class=" py-2 px-1 d-flex align-items-center">
+								<i class="fas fa-user-circle fa-2x"></i>
+							</div>
+							<div th:text="${msg.account}"
+								class="pl-2 pr-3 d-flex align-items-center col-md-1"></div>
+							<div th:text="${msg.message}"
+								class="rounded-lg border border-warning px-3 py-2 d-flex align-items-center col-md-10"></div>
+						</li>
+					</ul>
+				</div>
+			</article>
+		</div>
+	</div>
+
+	<div class="container">
+		<div th:unless="${userToken.account != null}">
+			<p>ログインしてください。</p>
+			<a th:href="${Login}">ログインページへ</a>
+		</div>
+	</div>
+
 </body>
 </html>
