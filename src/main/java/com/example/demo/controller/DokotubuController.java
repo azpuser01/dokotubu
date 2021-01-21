@@ -77,8 +77,7 @@ public class DokotubuController {
 	}
 
 	@PostMapping("Login") // Loginでpostされた場合動作
-	public String postLogin(@ModelAttribute("loginForm") @Validated LoginForm loginForm, BindingResult result,
-			UserToken userToken,Model model, RedirectAttributes redirectAttributes) {
+	public String postLogin(@ModelAttribute("loginForm") @Validated LoginForm loginForm, BindingResult result,Model model, RedirectAttributes redirectAttributes) {
 
 		if (result.hasErrors()) {
 			redirectAttributes.addFlashAttribute("errmsg", "アカウント名とパスワードを入力してください。");
@@ -101,8 +100,7 @@ public class DokotubuController {
 	}
 
 	@PostMapping("PostMessage") // PostMessageでpostされた場合動作
-	public String postMessage(@ModelAttribute("mainForm") @Validated MainForm mainForm,
-			MessageDao messageDao,BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+	public String postMessage(@ModelAttribute("mainForm") @Validated MainForm mainForm,BindingResult result, Model model, RedirectAttributes redirectAttributes) {
 		Message_tbl messageTbl = new Message_tbl();
 				
 		if (result.hasErrors() || mainForm.getMessage().length() == 0) {

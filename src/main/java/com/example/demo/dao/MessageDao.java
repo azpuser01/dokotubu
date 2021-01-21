@@ -66,7 +66,7 @@ public class MessageDao implements MessageDaoInterface {
 				+ "from MESSAGE_TBL as M "
 				+ "left outer join USER_TBL as U "
 				+ "on U.USERID = M.LOG_ID "
-				+ "order by M.MESSAGEID ;";
+				+ "order by M.MESSAGEID desc;";
 
 		List<Map<String, Object>> resultList = namedParameterjdbcTemplate.queryForList(sql, parameters);
 		List<ExtendedMessage> list = new ArrayList<ExtendedMessage>();
