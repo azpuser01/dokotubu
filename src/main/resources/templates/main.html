@@ -5,23 +5,31 @@
 <title>どこつぶ|メイン</title>
 </head>
 <body>
-<div th:if="${loginForm.account != null}">
-<header><span th:text="${loginForm.account}+'さんログイン中!'"></span><a th:href="@{/Logout}" th:text="ログアウト"></a></header>
+<div th:if="${userToken.account != null}">
+<header><span th:text="${userToken.account}+'さんログイン中!'"></span><a th:href="@{/Logout}" th:text="ログアウト"></a></header>
 <h1>どこつぶメイン画面</h1>
 <article>
 <h2>投稿する</h2>
-<form action="#" method="post" id="tsubuyakiForm">
-<textarea name="tsubuyaki"></textarea>
+<form action="#" th:action="@{PostMessage}" method="post" id="tsubuyakiForm">
+<textarea name="message"></textarea>
+<input type="hidden" name="userId" th:value="${userToken.userId}">
 <input type="submit" value="投稿">
 </form>
 </article>
 <article>
 <h2>みんなの投稿</h2>
 <div class="timeLine">
+<table>
+<tr th:each="msg : ${msgList}">
+<td th:text="${msg.account}"></td>
+<td>:</td>
+<td th:text="${msg.message}"></td>
+</tr>
+</table>
 </div>
 </article>
 </div>
-<div th:unless="${loginForm.account != null}" th:text="ログインしなおしてください。">
+<div th:unless="${userToken.account != null}" th:text="ログインしなおしてください。">
 <a th:href="${Login}">ログインページへ</a>
 </div>
 </body>

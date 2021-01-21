@@ -43,11 +43,11 @@ public class MessageDao implements MessageDaoInterface {
 
 		Map<String, Object> parameters = new HashMap<String, Object>();
 
-		String sql = "select U.* ,M.*" 
-				+ "from USER_TBL; " 
-				+ "left outer join MESSAGE_TBL　as U"
-				+ "on U.USERID = M.LOG_ID" 
-				+ "order by M.MESSAGEID";
+		String sql = "select M.* ,U.*"
+				+ "from MESSAGE_TBL as M "
+				+ "left outer join USER_TBL as U "
+				+ "on U.USERID = M.LOG_ID "
+				+ "order by M.MESSAGEID ;";
 
 		List<Map<String, Object>> resultList = namedParameterjdbcTemplate.queryForList(sql, parameters);
 		List<ExtendedMessage> list = new ArrayList<ExtendedMessage>();

@@ -37,7 +37,7 @@
   create table if not exists USER_TBL(
   	USERID int(4) NOT NULL AUTO_INCREMENT,
   	ACCOUNT varchar(20) NOT NULL unique,
-  	PASS char(4) NOT NULL,
+  	PASS text NOT NULL,
     primary key (USERID)
   ) default charset=utf8mb4;
 
